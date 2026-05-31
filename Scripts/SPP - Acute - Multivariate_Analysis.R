@@ -1,6 +1,6 @@
 ###The Swimmer's Phenomics Project - Study 1###
 
-#Data analysis for the Swimmer's Phenomics Project - Study 1 - Acute Post-Exercise Tiem Course Study
+#Data analysis for the Swimmer's Phenomics Project - Study 1 - Acute Post-Exercise Time Course Study
 #Purpose: Data clean to create DF of untargeted data
 
 #Analysis plan:
