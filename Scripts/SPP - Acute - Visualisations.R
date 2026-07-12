@@ -45,10 +45,11 @@ time_plot <- sex_avg %>%
   scale_y_continuous(breaks = y_breaks, labels = format_mmss(y_breaks)) +
   scale_x_continuous(breaks = 1:7) +
   scale_color_manual(values = c("Female" = "grey", "Male" = 'black')) + 
-  labs(y = "200 m Time (mm:ss)", x = "Step") +
+  labs(y = "200 m Time (mm:ss)", x = "Step", title = "A") +
   facet_wrap(~Session, labeller = labeller(Session = c("1" = "INC1", "2" = "INC2"))) +
   theme(plot.background = element_rect(fill = 'white', colour = NA), 
         panel.background = element_rect(fill = 'white', colour = NA), 
+        plot.title = element_text(size = 24, face = "bold"), 
         axis.line = element_line(), 
         axis.title.x = element_text(size = 14, face = "italic", margin = margin(t = 8)), 
         axis.title.y = element_text(size = 14, face = "italic", margin = margin(r = 8)), 
@@ -70,10 +71,11 @@ lactate_plot <- sex_avg %>%
   scale_x_continuous(breaks = 1:7) +
   scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 1)) + 
   scale_color_manual(values = c("Female" = "grey", "Male" = 'black')) + 
-  labs(y = "Blood Lactate Concentration (mmol/L)", x = "Step") + 
+  labs(y = "Blood Lactate Concentration (mmol/L)", x = "Step", title = "B") + 
   facet_wrap(~Session, labeller = labeller(Session = c("1" = "INC1", "2" = "INC2"))) + 
   theme(plot.background = element_rect(fill = 'white', colour = NA), 
         panel.background = element_rect(fill = 'white', colour = NA), 
+        plot.title = element_text(size = 24, face = "bold"), 
         axis.line = element_line(), 
         axis.title.x = element_text(size = 14, face = "italic", margin = margin(t = 8)), 
         axis.title.y = element_text(size = 14, face = "italic", margin = margin(r = 8)), 
@@ -86,8 +88,8 @@ lactate_plot <- sex_avg %>%
 
 combined_step_test_plot <- time_plot + lactate_plot
 
-ggsave("Images/time_bla_results.png", plot = combined_step_test_plot, width = 18, 
-       height = 9, dpi = 600, bg = "white")
+ggsave("Images/time_bla_results.png", plot = combined_step_test_plot, width = 10, 
+       height = 6, dpi = 600, bg = "white")
   
 
 
