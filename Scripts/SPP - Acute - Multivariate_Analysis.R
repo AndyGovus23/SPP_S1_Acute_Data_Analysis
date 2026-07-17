@@ -16,6 +16,7 @@ library(tidyplots)
 library(ALASCA)
 library(readr)
 library(data.table)
+library(patchwork)
 
 ####PART X - Import Data#####
 
@@ -128,6 +129,8 @@ alasca_time_session_loadings_pc1_plot <-
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
+        axis.text = element_text(size = 12), 
+        axis.title = element_text(size = 14), 
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
   
@@ -163,6 +166,8 @@ alasca_time_session_loadings_pc2_plot <-
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
+        axis.text = element_text(size = 12), 
+        axis.title = element_text(size = 14),
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
@@ -196,8 +201,9 @@ alasca_time_session_scores_pc1_plot <-
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
         axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
+        axis.text = element_text(size = 12), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13), 
+        legend.title = element_text(size = 13, face = "bold"), 
         legend.text = element_text(size = 13))
 
 ## PC2 ##
@@ -220,9 +226,22 @@ alasca_time_session_scores_pc2_plot <-
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
         axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
+        axis.text = element_text(size = 12), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13), 
+        legend.title = element_text(size = 13, face = "bold"), 
         legend.text = element_text(size = 13))
+
+
+### COMBINE LOADINGS & SCORES PLOTS ###
+
+# PC1
+alasca_time_session_pc1_combined_plot <- alasca_time_session_scores_pc1_plot + alasca_time_session_loadings_pc1_plot
+ggsave("Images/ASCA_all_PC1.png", alasca_time_session_pc1_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+
+# PC2
+alasca_time_session_pc2_combined_plot <- alasca_time_session_scores_pc2_plot + alasca_time_session_loadings_pc2_plot
+ggsave("Images/ASCA_all_PC2.png", alasca_time_session_pc2_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+
 
 ### PREDICTIONS ###
 
@@ -478,8 +497,9 @@ alasca_time_session_named_loadings_pc1_plot <-
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
-        axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
+        axis.title = element_text(size = 14), 
+        axis.title.x = element_text(margin = ggplot2::margin(t = 10), size = 11), 
+        axis.title.y = element_text(margin = ggplot2::margin(r = 10), size = 12))
 
 
 ## PC2 ##
@@ -511,8 +531,9 @@ alasca_time_session_named_loadings_pc2_plot <-
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
-        axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
+        axis.title = element_text(size = 14), 
+        axis.title.x = element_text(margin = ggplot2::margin(t = 10), size = 11), 
+        axis.title.y = element_text(margin = ggplot2::margin(r = 10), size = 12))
 
 
 ### SCORES ###
@@ -544,8 +565,9 @@ alasca_time_session_named_scores_pc1_plot <-
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
         axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
+        axis.text = element_text(size = 12), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13), 
+        legend.title = element_text(size = 13, face = "bold"), 
         legend.text = element_text(size = 13))
 
 ## PC2 ##
@@ -568,9 +590,22 @@ alasca_time_session_named_scores_pc2_plot <-
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
         axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
+        axis.text = element_text(size = 12),
         legend.position = "bottom", 
-        legend.title = element_text(size = 13), 
+        legend.title = element_text(size = 13, face = "bold"), 
         legend.text = element_text(size = 13))
+
+
+### COMBINE LOADINGS & SCORES PLOTS ###
+
+# PC1
+alasca_time_session_named_pc1_combined_plot <- alasca_time_session_named_scores_pc1_plot + alasca_time_session_named_loadings_pc1_plot
+ggsave("Images/ASCA_named_PC1.png", alasca_time_session_named_pc1_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+
+# PC2
+alasca_time_session_named_pc2_combined_plot <- alasca_time_session_named_scores_pc2_plot + alasca_time_session_named_loadings_pc2_plot
+ggsave("Images/ASCA_named_PC2.png", alasca_time_session_named_pc2_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+
 
 ### PREDICTIONS ###
 
