@@ -124,13 +124,14 @@ alasca_time_session_loadings_pc1_plot <-
   ggplot(alasca_time_session_loadings_pc1_top20, aes(x = loading, y = factor(metabolite, levels = alasca_time_session_loadings_pc1_order))) + 
   geom_point() + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(breaks = seq(-0.15, 0.27, by = 0.03)) + 
+  scale_x_continuous(limits = c(-0.16, 0.28), breaks = seq(-0.16, 0.28, by = 0.04)) + 
   labs(x = "Loading PC1 (47.6%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.text = element_text(size = 12), 
-        axis.title = element_text(size = 14), 
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 14), 
+        axis.title = element_text(size = 16, face = "bold"), 
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
   
@@ -161,13 +162,14 @@ alasca_time_session_loadings_pc2_plot <-
   ggplot(alasca_time_session_loadings_pc2_top20, aes(x = loading, y = factor(metabolite, levels = alasca_time_session_loadings_pc2_order))) + 
   geom_point() + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(breaks = seq(-0.15, 0.45, by = 0.03)) + 
+  scale_x_continuous(limits = c(-0.12, 0.48), breaks = seq(-0.12, 0.48, by = 0.04)) + 
   labs(x = "Loading PC2 (27.3%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.text = element_text(size = 12), 
-        axis.title = element_text(size = 14),
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 14), 
+        axis.title = element_text(size = 16, face = "bold"), 
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
@@ -200,11 +202,12 @@ alasca_time_session_scores_pc1_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
-        axis.text = element_text(size = 12), 
+        axis.text = element_text(size = 14), 
+        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13, face = "bold"), 
-        legend.text = element_text(size = 13))
+        legend.title = element_text(size = 14, face = "bold"), 
+        legend.text = element_text(size = 14))
 
 ## PC2 ##
 alasca_time_session_scores_pc2 <- alasca_time_session_scores %>% 
@@ -225,21 +228,24 @@ alasca_time_session_scores_pc2_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
-        axis.text = element_text(size = 12), 
+        axis.text = element_text(size = 14), 
+        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13, face = "bold"), 
-        legend.text = element_text(size = 13))
+        legend.title = element_text(size = 14, face = "bold"), 
+        legend.text = element_text(size = 14))
 
 
 ### COMBINE LOADINGS & SCORES PLOTS ###
 
 # PC1
-alasca_time_session_pc1_combined_plot <- alasca_time_session_scores_pc1_plot + alasca_time_session_loadings_pc1_plot
+alasca_time_session_pc1_combined_plot <- (alasca_time_session_scores_pc1_plot + alasca_time_session_loadings_pc1_plot) + 
+  plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
 ggsave("Images/ASCA_all_PC1.png", alasca_time_session_pc1_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
 
 # PC2
-alasca_time_session_pc2_combined_plot <- alasca_time_session_scores_pc2_plot + alasca_time_session_loadings_pc2_plot
+alasca_time_session_pc2_combined_plot <- (alasca_time_session_scores_pc2_plot + alasca_time_session_loadings_pc2_plot) +
+  plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
 ggsave("Images/ASCA_all_PC2.png", alasca_time_session_pc2_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
 
 
@@ -477,29 +483,31 @@ alasca_time_session_named_loadings_pc1 <- alasca_time_session_named_loadings %>%
 alasca_time_session_named_loadings_pc1 <- 
   alasca_time_session_named_loadings_pc1[order(-alasca_time_session_named_loadings_pc1$loading), ]
 # Top 10 variables (5 positive, 5 negatives)
-alasca_time_session_named_loadings_pc1_top10 <- 
-  alasca_time_session_named_loadings_pc1[c(1:5,245:249), ]
+alasca_time_session_named_loadings_pc1_top20 <- 
+  alasca_time_session_named_loadings_pc1[c(1:10,240:249), ]
 # Order from negative to positive
-alasca_time_session_named_loadings_pc1_top10 <- 
-  alasca_time_session_named_loadings_pc1_top10[order(alasca_time_session_named_loadings_pc1_top10$loading), ]
+alasca_time_session_named_loadings_pc1_top20 <- 
+  alasca_time_session_named_loadings_pc1_top20[order(alasca_time_session_named_loadings_pc1_top20$loading), ]
 # Order of the names 
 alasca_time_session_named_loadings_pc1_order <- 
-  alasca_time_session_named_loadings_pc1_top10$metabolite
+  alasca_time_session_named_loadings_pc1_top20$metabolite
 
 # Plot - loadings
 alasca_time_session_named_loadings_pc1_plot <- 
-  ggplot(alasca_time_session_named_loadings_pc1_top10, 
+  ggplot(alasca_time_session_named_loadings_pc1_top20, 
          aes(x = loading, y = factor(metabolite, levels = alasca_time_session_named_loadings_pc1_order))) + 
   geom_point() + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(breaks = seq(-0.15, 0.33, by = 0.03)) + 
+  scale_x_continuous(limits = c(-0.16, 0.32), breaks = seq(-0.16, 0.32, by = 0.04)) + 
   labs(x = "Loading PC1 (63.9%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.title = element_text(size = 14), 
-        axis.title.x = element_text(margin = ggplot2::margin(t = 10), size = 11), 
-        axis.title.y = element_text(margin = ggplot2::margin(r = 10), size = 12))
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 14), 
+        axis.title = element_text(size = 16, face = "bold"), 
+        axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
+        axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
 
 ## PC2 ##
@@ -511,29 +519,32 @@ alasca_time_session_named_loadings_pc2 <- alasca_time_session_named_loadings %>%
 alasca_time_session_named_loadings_pc2 <- 
   alasca_time_session_named_loadings_pc2[order(-alasca_time_session_named_loadings_pc2$loading), ]
 # Top 10 variables (5 positive, 5 negatives)
-alasca_time_session_named_loadings_pc2_top10 <- 
-  alasca_time_session_named_loadings_pc2[c(1:5,245:249), ]
+alasca_time_session_named_loadings_pc2_top20 <- 
+  alasca_time_session_named_loadings_pc2[c(1:10,240:249), ]
 # Order from negative to positive
-alasca_time_session_named_loadings_pc2_top10 <- 
-  alasca_time_session_named_loadings_pc2_top10[order(alasca_time_session_named_loadings_pc2_top10$loading), ]
+alasca_time_session_named_loadings_pc2_top20 <- 
+  alasca_time_session_named_loadings_pc2_top20[order(alasca_time_session_named_loadings_pc2_top20$loading), ]
 # Order of the names 
 alasca_time_session_named_loadings_pc2_order <- 
-  alasca_time_session_named_loadings_pc2_top10$metabolite
+  alasca_time_session_named_loadings_pc2_top20$metabolite
 
 # Plot - loadings
 alasca_time_session_named_loadings_pc2_plot <- 
-  ggplot(alasca_time_session_named_loadings_pc2_top10, 
+  ggplot(alasca_time_session_named_loadings_pc2_top20, 
          aes(x = loading, y = factor(metabolite, levels = alasca_time_session_named_loadings_pc2_order))) + 
   geom_point() + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(breaks = seq(-0.30, 0.33, by = 0.03)) + 
+  scale_x_continuous(limits = c(-0.30, 0.35), breaks = seq(-0.30, 0.35, by = 0.05), 
+                     labels = scales::label_number(accuracy = 0.01)) + 
   labs(x = "Loading PC2 (19.7%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.title = element_text(size = 14), 
-        axis.title.x = element_text(margin = ggplot2::margin(t = 10), size = 11), 
-        axis.title.y = element_text(margin = ggplot2::margin(r = 10), size = 12))
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 14), 
+        axis.title = element_text(size = 16, face = "bold"), 
+        axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
+        axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
 
 ### SCORES ###
@@ -564,11 +575,12 @@ alasca_time_session_named_scores_pc1_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
-        axis.text = element_text(size = 12), 
+        axis.text = element_text(size = 14), 
+        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13, face = "bold"), 
-        legend.text = element_text(size = 13))
+        legend.title = element_text(size = 14, face = "bold"), 
+        legend.text = element_text(size = 14))
 
 ## PC2 ##
 alasca_time_session_named_scores_pc2 <- alasca_time_session_named_scores %>% 
@@ -589,21 +601,24 @@ alasca_time_session_named_scores_pc2_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.title = element_text(margin = ggplot2::margin(t = 10), size = 15),
-        axis.text = element_text(size = 12),
+        axis.text = element_text(size = 14), 
+        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 13, face = "bold"), 
-        legend.text = element_text(size = 13))
+        legend.title = element_text(size = 14, face = "bold"), 
+        legend.text = element_text(size = 14))
 
 
 ### COMBINE LOADINGS & SCORES PLOTS ###
 
 # PC1
-alasca_time_session_named_pc1_combined_plot <- alasca_time_session_named_scores_pc1_plot + alasca_time_session_named_loadings_pc1_plot
+alasca_time_session_named_pc1_combined_plot <- (alasca_time_session_named_scores_pc1_plot + alasca_time_session_named_loadings_pc1_plot) + 
+  plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
 ggsave("Images/ASCA_named_PC1.png", alasca_time_session_named_pc1_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
 
 # PC2
-alasca_time_session_named_pc2_combined_plot <- alasca_time_session_named_scores_pc2_plot + alasca_time_session_named_loadings_pc2_plot
+alasca_time_session_named_pc2_combined_plot <- (alasca_time_session_named_scores_pc2_plot + alasca_time_session_named_loadings_pc2_plot) + 
+  plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
 ggsave("Images/ASCA_named_PC2.png", alasca_time_session_named_pc2_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
 
 
