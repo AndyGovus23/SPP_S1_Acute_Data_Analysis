@@ -17,6 +17,7 @@ library(ALASCA)
 library(readr)
 library(data.table)
 library(patchwork)
+library(ggh4x)
 
 ####PART X - Import Data#####
 
@@ -637,16 +638,16 @@ alasca_time_session_named_pred$session <- factor(alasca_time_session_named_pred$
                                            levels=c("Control", "Session 1", "Session 2"),
                                            labels=c("Control", "Session 1", "Session 2"))
 
-alasca_time_session_named_pred_top10_pc1 <- alasca_time_session_named_pred %>%
+alasca_time_session_named_pred_top20_pc1 <- alasca_time_session_named_pred %>%
   filter(variable %in% alasca_time_session_named_loadings_pc1_order)
 
-alasca_time_session_named_pred_top10_pc2 <- alasca_time_session_named_pred %>% 
+alasca_time_session_named_pred_top20_pc2 <- alasca_time_session_named_pred %>% 
   filter(variable %in% alasca_time_session_named_loadings_pc2_order)
 
 dodge_width <- 0.3 #position dodge
 
 # Plot - Individual metabolites
-alasca_time_session_named_pred_pc1_plot <- alasca_time_session_named_pred_top10_pc1 %>%
+alasca_time_session_named_pred_pc1_plot <- alasca_time_session_named_pred_top20_pc1 %>%
   ggplot(aes(x = sample_time, y = pred, color = session, group = session, shape = session)) +
   geom_point(size = 3, position = position_dodge(width = dodge_width)) +
   geom_line(aes(linetype = session), linewidth = 1, position = position_dodge(width = dodge_width)) +
@@ -661,12 +662,82 @@ alasca_time_session_named_pred_pc1_plot <- alasca_time_session_named_pred_top10_
   facet_wrap(~variable, scales = "free_y") +
   theme_minimal(base_size = 14) +
   theme(strip.background = element_rect(color = "black", fill = "white", linewidth = 1),
-        strip.text = element_text(face = "bold", size = 10),
+        strip.text = element_text(face = "bold", size = 6),
         legend.position = "bottom",
         panel.grid.major.x = element_blank(),
         panel.grid.minor = element_blank()) +
   guides(color = guide_legend(override.aes = list(size = 4)),
          shape = guide_legend(override.aes = list(size = 4)))
+
+
+# PC1 metabolites (text size for one metabolite)
+#Get top5 postive and top5 negative loadings, each already sorted
+top5_pos <- alasca_time_session_named_loadings_pc1_top20 %>%
+  slice_max(order_by = loading, n = 5) %>%
+  arrange(desc(loading))
+
+top5_neg <- alasca_time_session_named_loadings_pc1_top20 %>%
+  slice_min(order_by = loading, n = 5) %>%
+  arrange(desc(loading))
+
+#Ordered vector: positives first, then negatives
+ordered_vars <- c(top5_pos$metabolite, top5_neg$metabolite)
+
+alasca_time_session_named_pred_top10_pc1 <- alasca_time_session_named_pred_top20_pc1 %>%
+  filter(variable %in% ordered_vars) %>%
+  mutate(variable = factor(variable, levels = ordered_vars))
+
+#Strip sizes need to follow the SAME order now
+vars <- levels(alasca_time_session_named_pred_top10_pc1$variable)
+strip_sizes <- rep(12, length(vars))
+strip_sizes[vars == "3_hydroxyisobutyric_acid_1_3_nph_carbonyl_carboxy_phospho"] <- 9
+
+alasca_time_session_named_pred_pc1_plot <- alasca_time_session_named_pred_top10_pc1 %>%
+  ggplot(aes(x = sample_time, y = pred, color = session, group = session, shape = session)) +
+  geom_point(size = 3, position = position_dodge(width = dodge_width)) +
+  geom_line(aes(linetype = session), linewidth = 1, position = position_dodge(width = dodge_width)) +
+  geom_errorbar(aes(ymin = low, ymax = high),
+                width = 0.1, linewidth = 0.8,
+                position = position_dodge(width = dodge_width)) +
+  scale_color_manual(values = c("Control" = "#E69F00", "Session 1" = "#56B4E9", "Session 2" = "black")) +
+  scale_shape_manual(values = c(16, 17, 18)) +
+  scale_linetype_manual(values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
+  ylab("Std. Value") +
+  xlab("") +
+  facet_wrap2(
+    ~variable, scales = "free_y",
+    ncol = 4,
+    strip = strip_themed(
+      text_x = lapply(strip_sizes, function(s) element_text(face = "bold", size = s))
+    )
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(strip.background = element_rect(color = "black", fill = "white", linewidth = 1),
+        legend.position = "bottom",
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank()) +
+  guides(color = guide_legend(override.aes = list(size = 4)),
+         shape = guide_legend(override.aes = list(size = 4)))
+
+ggsave("Images/ASCA_named_PC1_top10.png", alasca_time_session_named_pred_pc1_plot, width = 18, height = 10, dpi = 600, bg = "white")
+
+
+#PC2
+#Get top5 postive and top5 negative loadings, each already sorted
+top5_pos <- alasca_time_session_named_loadings_pc2_top20 %>%
+  slice_max(order_by = loading, n = 5) %>%
+  arrange(desc(loading))
+
+top5_neg <- alasca_time_session_named_loadings_pc2_top20 %>%
+  slice_min(order_by = loading, n = 5) %>%
+  arrange(desc(loading))
+
+#Ordered vector: positives first, then negatives
+ordered_vars <- c(top5_pos$metabolite, top5_neg$metabolite)
+
+alasca_time_session_named_pred_top10_pc2 <- alasca_time_session_named_pred_top20_pc2 %>%
+  filter(variable %in% ordered_vars) %>%
+  mutate(variable = factor(variable, levels = ordered_vars))
 
 alasca_time_session_named_pred_pc2_plot <- alasca_time_session_named_pred_top10_pc2 %>%
   ggplot(aes(x = sample_time, y = pred, color = session, group = session, shape = session)) +
@@ -689,6 +760,8 @@ alasca_time_session_named_pred_pc2_plot <- alasca_time_session_named_pred_top10_
         panel.grid.minor = element_blank()) +
   guides(color = guide_legend(override.aes = list(size = 4)),
          shape = guide_legend(override.aes = list(size = 4)))
+
+ggsave("Images/ASCA_named_PC2_top10.png", alasca_time_session_named_pred_pc2_plot, width = 18, height = 10, dpi = 600, bg = "white")
 
 
 # #Plot - Effects - Model Scores and Loadings
