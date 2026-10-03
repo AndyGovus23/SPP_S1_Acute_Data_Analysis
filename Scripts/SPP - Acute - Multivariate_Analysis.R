@@ -493,20 +493,46 @@ alasca_time_session_named_loadings_pc1_top20 <-
 alasca_time_session_named_loadings_pc1_order <- 
   alasca_time_session_named_loadings_pc1_top20$metabolite
 
+# New names 
+new_names_pc1 <- c("Hydroxypropionic acid",
+                   "Lactic acid (lactate)",
+                   "5-Aminolevulinic acid",
+                   "D-Galactose",
+                   "Erythrose",
+                   "Glucosamine-6-sulfate",
+                   "L-Methionine",
+                   "Pyruvic acid (pyruvate)",
+                   "dUMP (deoxyuridine monophosphate)",
+                   "2-Methyl-3-ketovaleric acid",
+                   "Decanoylcarnitine (C10:0)",
+                   "Tetradecenoylcarnitine (C14:1)",
+                   "Lauroylcarnitine (C12:0)",
+                   "Decenoylcarnitine (C10:1)",
+                   "Hexanoylcarnitine (C6:0)",
+                   "Hydroxydecanoylcarnitine (C10:0-OH)",
+                   "Octanoylcarnitine (C8:0)",
+                   "9-OAHSA",
+                   "3-Hydroxyisobutyric acid",
+                   "Tetradecadienoylcarnitine (C14:2)")
+
+# Named vector: old name -> new name
+label_map_pc1 <- setNames(new_names_pc1, alasca_time_session_named_loadings_pc1_order)
+
 # Plot - loadings
 alasca_time_session_named_loadings_pc1_plot <- 
   ggplot(alasca_time_session_named_loadings_pc1_top20, 
          aes(x = loading, y = factor(metabolite, levels = alasca_time_session_named_loadings_pc1_order))) + 
-  geom_point() + 
+  geom_point(size = 2.5) + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(limits = c(-0.16, 0.32), breaks = seq(-0.16, 0.32, by = 0.04)) + 
+  scale_x_continuous(limits = c(-0.14, 0.35), breaks = seq(-0.14, 0.35, by = 0.07)) + 
+  scale_y_discrete(labels = label_map_pc1) +
   labs(x = "Loading PC1 (63.9%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.text.x = element_text(size = 12), 
-        axis.text.y = element_text(size = 14), 
-        axis.title = element_text(size = 16, face = "bold"), 
+        axis.text.x = element_text(size = 16), 
+        axis.text.y = element_text(size = 16), 
+        axis.title = element_text(size = 18, face = "bold"), 
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
@@ -529,21 +555,47 @@ alasca_time_session_named_loadings_pc2_top20 <-
 alasca_time_session_named_loadings_pc2_order <- 
   alasca_time_session_named_loadings_pc2_top20$metabolite
 
+# New names 
+new_names_pc2 <- c("Caffeine",
+                   "3-Methylhistidine",
+                   "9-HPODE",
+                   "Glu-Leu",
+                   "Tryptophan",
+                   "Ectoine",
+                   "L-Tryptophan",
+                   "3-Methylhistamine",
+                   "Phosphatidylethanolamine 18:1",
+                   "Phenylalanine",
+                   "Gluconic acid",
+                   "Deoxycholic acid",
+                   "Malic acid",
+                   "Pyruvic acid (pyruvate)",
+                   "Erythrose",
+                   "5-Aminolevulinic acid",
+                   "Glucosamine-6-sulfate",
+                   "Lactic acid (lactate)",
+                   "dUMP (deoxyuridine monophosphate)",
+                   "Hydroxypropionic acid")
+
+# Named vector: old name -> new name
+label_map_pc2 <- setNames(new_names_pc2, alasca_time_session_named_loadings_pc2_order)
+
 # Plot - loadings
 alasca_time_session_named_loadings_pc2_plot <- 
   ggplot(alasca_time_session_named_loadings_pc2_top20, 
          aes(x = loading, y = factor(metabolite, levels = alasca_time_session_named_loadings_pc2_order))) + 
-  geom_point() + 
+  geom_point(size = 2.5) + 
   geom_errorbar(aes(xmin = low, xmax = high), width = .1) + 
-  scale_x_continuous(limits = c(-0.30, 0.35), breaks = seq(-0.30, 0.35, by = 0.05), 
+  scale_x_continuous(limits = c(-0.32, 0.32), breaks = seq(-0.32, 0.32, by = 0.08), 
                      labels = scales::label_number(accuracy = 0.01)) + 
+  scale_y_discrete(labels = label_map_pc2) +
   labs(x = "Loading PC2 (19.7%)", y = "Metabolite") + 
   geom_vline(xintercept = 0.00, linetype = "dotted") + 
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank(), 
-        axis.text.x = element_text(size = 12), 
-        axis.text.y = element_text(size = 14), 
-        axis.title = element_text(size = 16, face = "bold"), 
+        axis.text.x = element_text(size = 16), 
+        axis.text.y = element_text(size = 16), 
+        axis.title = element_text(size = 18, face = "bold"), 
         axis.title.x = element_text(margin = ggplot2::margin(t = 10)), 
         axis.title.y = element_text(margin = ggplot2::margin(r = 10)))
 
@@ -576,12 +628,12 @@ alasca_time_session_named_scores_pc1_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.text = element_text(size = 14), 
-        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
-        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
+        axis.text = element_text(size = 16), 
+        axis.title.x = element_text(size = 18, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 18, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 14, face = "bold"), 
-        legend.text = element_text(size = 14))
+        legend.title = element_text(size = 16, face = "bold"), 
+        legend.text = element_text(size = 16))
 
 ## PC2 ##
 alasca_time_session_named_scores_pc2 <- alasca_time_session_named_scores %>% 
@@ -602,12 +654,12 @@ alasca_time_session_named_scores_pc2_plot <-
   scale_linetype_manual(name = "Session", values = c("Control" = "solid", "Session 1" = "dashed", "Session 2" = "dotdash")) +
   theme(panel.background = element_blank(), 
         axis.line = element_line(), 
-        axis.text = element_text(size = 14), 
-        axis.title.x = element_text(size = 16, face = "bold", margin = margin(t = 10)), 
-        axis.title.y = element_text(size = 16, face = "bold", margin = margin(r = 10)), 
+        axis.text = element_text(size = 16), 
+        axis.title.x = element_text(size = 18, face = "bold", margin = margin(t = 10)), 
+        axis.title.y = element_text(size = 18, face = "bold", margin = margin(r = 10)), 
         legend.position = "bottom", 
-        legend.title = element_text(size = 14, face = "bold"), 
-        legend.text = element_text(size = 14))
+        legend.title = element_text(size = 16, face = "bold"), 
+        legend.text = element_text(size = 16))
 
 
 ### COMBINE LOADINGS & SCORES PLOTS ###
@@ -615,12 +667,12 @@ alasca_time_session_named_scores_pc2_plot <-
 # PC1
 alasca_time_session_named_pc1_combined_plot <- (alasca_time_session_named_scores_pc1_plot + alasca_time_session_named_loadings_pc1_plot) + 
   plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
-ggsave("Images/ASCA_named_PC1.png", alasca_time_session_named_pc1_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+ggsave("Images/ASCA_named_PC1.png", alasca_time_session_named_pc1_combined_plot, width = 18, height = 8, dpi = 600, bg = "white")
 
 # PC2
 alasca_time_session_named_pc2_combined_plot <- (alasca_time_session_named_scores_pc2_plot + alasca_time_session_named_loadings_pc2_plot) + 
   plot_annotation(tag_levels = 'A') & theme(plot.tag = element_text(size = 24, face = "bold"))
-ggsave("Images/ASCA_named_PC2.png", alasca_time_session_named_pc2_combined_plot, width = 18, height = 10, dpi = 600, bg = "white")
+ggsave("Images/ASCA_named_PC2.png", alasca_time_session_named_pc2_combined_plot, width = 18, height = 8, dpi = 600, bg = "white")
 
 
 ### PREDICTIONS ###
