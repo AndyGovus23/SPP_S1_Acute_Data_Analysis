@@ -123,6 +123,93 @@ tca_intermediates <- c("cis_aconitic_acid_1_3_nph_carbonyl_carboxy_phospho", "ci
                        "citraconic_acid_2_3_nph_carbonyl_carboxy_phospho", "succinylacetone")
 
 
+# Display names -----------------------------------------------------------
+
+pretty_names <- c(
+  # Acylcarnitines
+  carnitine = "carnitine",
+  l_acetylcarnitine_car_2_0 = "L-acetylcarnitine (C2:0)", 
+  propionylcarnitine_car_3_0 = "propionylcarnitine (C3:0)", 
+  butyryl_isobutyrylcarnitine_car_4_0 = "butyryl/isobutyrylcarnitine (C4:0)", 
+  X3_hydroxybutyrylcarnitine_car_4_0_oh = "3-hydroxybutyrylcarnitine (C4:0-OH)", 
+  tiglylcarnitine_car_5_1 = "tiglylcarnitine (C5:1)", 
+  isovaleryl_valeryl_2_methylbutyryl_carnitine_car_5_0 = "isovaleryl/valeryl/2-methylbutyrylcarnitine (C5:0)", 
+  glutarylcarnitine_car_5_0_dc = "glutarylcarnitine (C5:0-DC)", 
+  hexanoylcarnitine_car_6_0 = "hexanoylcarnitine (C6:0)", 
+  X2_octenoylcarnitine_car_8_1 = "trans-2-octenoylcarnitine (C8:1)", 
+  octanoylcarnitine_car_8_0 = "octanoylcarnitine (C8:0)", 
+  decanoylcarnitine_car_10_0 = "decanoylcarnitine (C10:0)", 
+  decenoylcarnitine_car_10_1 = "decenoylcarnitine (C10:1)", 
+  hydroxydecanoylcarnitine_car_10_0_oh = "hydroxydecanoylcarnitine (C10:0-OH)", 
+  lauroylcarnitine_car_12_0 = "lauroylcarnitine (C12:0)", 
+  dodecenoylcarnitine_car_12_1 = "dodecenoylcarnitine (C12:1)", 
+  tetradecanoylcarnitine_car_14_0 = "tetradecanoylcarnitine (C14:0)", 
+  tetradecenoylcarnitine_car_14_1 = "tetradecenoylcarnitine (C14:1)", 
+  tetradecadienoylcarnitine_car_14_2 = "tetradecadienoylcarnitine (C14:2)", 
+  palmitoylcarnitine_car_16_0 = "palmitoylcarnitine (C16:0)", 
+  hexadecenoylcarnitine_car_16_1 = "hexadecenoylcarnitine (C16:1)", 
+  stearoylcarnitine_car_18_0 = "stearoylcarnitine (C18:0)", 
+  octadecenoylcarnitine_car_18_1 = "octadecenoylcarnitine (C18:1)", 
+  octadecadienoylcarnitine_car_18_2 = "octadecadienoylcarnitine (C18:2)",
+  # Amino acids
+  arginine = "arginine", 
+  citrulline = "citrulline", 
+  homoarginine = "homoarginine", 
+  histidine = "histidine", 
+  l_histidine = "L-histidine", 
+  l_alanine = "L-alanine", 
+  l_glutamine = "L-glutamine", 
+  l_methionine = "L-methionine", 
+  phenylalanine = "phenylalanine", 
+  l_phenylalanine = "L-phenylalanine",
+  tryptophan = "tryptophan", 
+  l_tryptophan = "L-tryptophan", 
+  l_kynurenine = "L-kynurenine", 
+  l_homoserine = "L-homoserine", 
+  l_norleucine = "L-norleucine",
+  d_serine = "D-serine", 
+  d_cysteine = "D-cysteine", 
+  l_cystine = "L-cystine", 
+  o_tyrosine = "O-tyrosine", 
+  n_acetyl_l_arginine = "n-acetyl-l-arginine (NA-Arg)",
+  symmetric_dimethylarginine = "symmetric dimethylarginine (SDMA)", 
+  glutamic_acid_1_3_nph_carbonyl_carboxy_phospho = "glutamic acid (3-NPH-cpp 1)",
+  n_methyl_a_aminoisobutyric_acid = "n-methyl-alpha-aminoisobutyric acid (MeAIB)",
+  # TCA intermediates
+  cis_aconitic_acid_1_3_nph_carbonyl_carboxy_phospho = "cis-aconitic acid (3-NPH-ccp 1)", 
+  cis_aconitic_acid_3_3_nph_carbonyl_carboxy_phospho = "cis-aconitic acid (3-NPH-ccp 3)",
+  succinic_acid_1_3_nph_carbonyl_carboxy_phospho = "succinic acid (3-NPH-ccp 1)", 
+  succinic_acid_2_3_nph_carbonyl_carboxy_phospho = "succinic acid (3-NPH-ccp 2)",
+  succinic_acid_2x_3_nph = "succinic acid (di-3-NPH)", 
+  malic_acid_2_3_nph_carbonyl_carboxy_phospho = "malic acid (3-NPH-ccp 2)", 
+  pyruvic_acid_2x_3_nph = "pyruvic acid (di-3-NPH)",
+  lactic_acid_1x_3_nph = "lactic acid (3-NPH)", 
+  hydroxypropionic_acid = "hydroxypropionic acid", 
+  citraconic_acid_1_3_nph_carbonyl_carboxy_phospho = "citraconic acid (3-NPH-ccp 1)",
+  citraconic_acid_2_3_nph_carbonyl_carboxy_phospho = "citraconic acid (3-NPH-ccp 2)", 
+  succinylacetone = "succinylacetone",
+  # Fatty acids
+  X12_hydroxydodecanoic_acid = "12-hydroxydodecanoic acid (C12:0-OH)", 
+  X5_hydroxydecanoate = "5-hydroxydecanoate (C10:0-OH)", 
+  X2_hydroxyhexadecanoic_acid = "2-hydroxyhexadecanoic acid (C16:0-OH)",
+  myristic_acid = "myristic acid (C14:0)", 
+  heptadecanoic_acid = "heptadecanoic acid (C17:0)", 
+  linoleic_acid = "linoleic acid (C18:2)", 
+  elaidic_acid = "elaidic acid (trans-C18:1)",
+  ricinoleic_acid = "ricinoleic acid (C18:1-OH)", 
+  nonadecanoic_acid = "nonadecanoic acid (C19:0)", 
+  phytanic_acid = "phytanic acid (C20:0)", 
+  pinolenic_acid = "pinolenic acid (C18:3)",
+  X4z_7z_10z_13z_16z_19z_4_7_10_13_1_6_19_docosahexaenoic_acid = "docosahexaenoic acid (DHA, C22:6)", 
+  behenic_acid = "behenic acid (C22:0)", 
+  tricosanoic_acid = "tricosanoic acid (C23:0)", 
+  nervonic_acid = "nervonic acid (C24:1)", 
+  tetracosanoic_acid = "tetracosanoic acid (C24:0)", 
+  pentacosanoic_acid = "pentacosanoic acid (C25:0)", 
+  hexacosanoic_acid = "hexacosanoic acid (C26:0)"
+)
+
+
 # Heatmaps ----------------------------------------------------------------
 
 # Family lookup
@@ -141,7 +228,11 @@ emm_df_all <- emm_df %>%
   group_by(measure) %>% 
   mutate(emmean_z = as.numeric(scale(emmean))) %>% 
   ungroup() %>% 
-  mutate(measure_label = if_else(pval_int_fdr < 0.05, paste0(measure, " *"), measure))
+  mutate(measure_pretty = coalesce(unname(pretty_names[measure]), measure),
+         measure_label  = measure_pretty)
+
+# Check which metabolites still need a display name
+setdiff(unique(emm_df_all$measure), names(pretty_names))
 
 # Order metabolites within a family by clustering similarity of their pattern
 order_within_family <- function(df) {
@@ -155,6 +246,9 @@ order_within_family <- function(df) {
   rownames(wide_mat)[hc$order]
 }
 
+# Shared colour limits
+z_lim <- max(abs(emm_df_all$emmean_z), na.rm = TRUE)
+
 # Heatmap for a single family, using ALL its metabolites
 heatmap_plot <- function(fam_name) {
   df <- emm_df_all %>% filter(family == fam_name)
@@ -162,31 +256,33 @@ heatmap_plot <- function(fam_name) {
   df <- df %>% mutate(measure_label = factor(measure_label, 
                                              levels = measure_label[match(ord, measure)]))
   
-  #Bold the labels of significant metabolites using plotmath
+  # Append a star to labels of significant metabolites
   sig_lookup <- df %>% 
     distinct(measure_label, pval_int_fdr) %>% 
-    mutate(bold_label = if_else(pval_int_fdr < 0.05, 
-                                paste0("bold('", measure_label, "')"), 
-                                paste0("'", measure_label, "'")))
+    mutate(star_label = if_else(pval_int_fdr < 0.05, 
+                                paste0(measure_label, " \u2731"),   # ✱ heavy asterisk
+                                as.character(measure_label)))
   
   df %>% 
     ggplot(aes(x = sample_time, y = measure_label, fill = emmean_z)) + 
     geom_tile(color = "white", linewidth = 0.3) +
     facet_grid(~session) +
     scale_fill_gradient2(low = "#2e5597", mid = "white", high = "#fb495c", 
-                         midpoint = 0, name = "Z-scored\nEMM") + 
-    scale_y_discrete(labels = function(x) parse(text = sig_lookup$bold_label[match(x, sig_lookup$measure_label)])) + 
+                         midpoint = 0, 
+                         limits = c(-z_lim, z_lim), 
+                         name = "Z-scored\nEMM") + 
+    scale_y_discrete(labels = function(x) sig_lookup$star_label[match(x, sig_lookup$measure_label)]) + 
     labs(title = fam_name, x = NULL, y = NULL) +
     theme(plot.background = element_blank(),
           panel.background = element_blank(),
           plot.title = element_text(size = 24, face = "italic"), 
           axis.ticks = element_blank(),
-          axis.text.y = element_text(size = 12), 
-          axis.text.x = element_text(size = 12, angle = 45, hjust = 1), 
-          legend.title = element_text(size = 12), 
-          legend.text = element_text(size = 12), 
+          axis.text.y = element_text(size = 14), 
+          axis.text.x = element_text(size = 14, angle = 90, hjust = 1, vjust = 0.5), 
+          legend.title = element_text(size = 14), 
+          legend.text = element_text(size = 14), 
           strip.background = element_rect(fill = "#cdc9c9"), 
-          strip.text = element_text(size = 14, face = "bold"))
+          strip.text = element_text(size = 16, face = "bold"))
 }
 
 # Generate one family's heatmap at a time
@@ -205,5 +301,25 @@ ggsave("Images/aa_heatmap.png", amino_acid_heatmap,
 tca_intermediates_heatmap <- heatmap_plot("TCA intermediates")
 ggsave("Images/tca_heatmap.png", tca_intermediates_heatmap, 
        width = 10, height = 4, units = "in", dpi = 600)
+
+# Put plots into 2 figures
+
+# Figure 1: Acylcarnitines + Amino acids (side by side)
+fig1 <- (acylcarnitine_heatmap | amino_acid_heatmap) +
+  plot_layout(guides = "collect") & 
+  plot_annotation(tag_levels = "A") & 
+  theme(plot.tag = element_text(size = 24, face = 'bold'))
+
+# Figure 2: Fatty acids + TCA intermediates (side by side)
+fig2 <- (fatty_acid_heatmap | tca_intermediates_heatmap) +
+  plot_layout(guides = "collect") & 
+  plot_annotation(tag_levels = "A") & 
+  theme(plot.tag = element_text(size = 24, face = "bold"))
+
+# 9 x 5.6 in leaves room for a 3-line caption on a landscape letter page
+# with 1 in margins (usable area is 9 x 6.5 in)
+ggsave("Images/fig_acyl_aa.png", fig1, width = 18, height = 8, dpi = 600)
+ggsave("Images/fig_fa_tca.png",  fig2, width = 18, height = 8, dpi = 600)
+
 
 

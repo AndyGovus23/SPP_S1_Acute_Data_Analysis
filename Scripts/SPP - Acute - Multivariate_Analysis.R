@@ -494,26 +494,26 @@ alasca_time_session_named_loadings_pc1_order <-
   alasca_time_session_named_loadings_pc1_top20$metabolite
 
 # New names 
-new_names_pc1 <- c("Hydroxypropionic acid",
-                   "Lactic acid (lactate)",
-                   "5-Aminolevulinic acid",
-                   "D-Galactose",
-                   "Erythrose",
-                   "Glucosamine-6-sulfate",
-                   "L-Methionine",
-                   "Pyruvic acid (pyruvate)",
+new_names_pc1 <- c("hydroxypropionic acid",
+                   "lactic acid (3-NPH)",
+                   "5-aminolevulinic acid",
+                   "D-galactose",
+                   "erythrose",
+                   "glucosamine-6-sulfate",
+                   "L-methionine",
+                   "pyruvic acid (di-3-NPH)",
                    "dUMP (deoxyuridine monophosphate)",
-                   "2-Methyl-3-ketovaleric acid",
-                   "Decanoylcarnitine (C10:0)",
-                   "Tetradecenoylcarnitine (C14:1)",
-                   "Lauroylcarnitine (C12:0)",
-                   "Decenoylcarnitine (C10:1)",
-                   "Hexanoylcarnitine (C6:0)",
-                   "Hydroxydecanoylcarnitine (C10:0-OH)",
-                   "Octanoylcarnitine (C8:0)",
+                   "2-methyl-3-ketovaleric acid",
+                   "decanoylcarnitine (C10:0)",
+                   "tetradecenoylcarnitine (C14:1)",
+                   "lauroylcarnitine (C12:0)",
+                   "decenoylcarnitine (C10:1)",
+                   "hexanoylcarnitine (C6:0)",
+                   "hydroxydecanoylcarnitine (C10:0-OH)",
+                   "octanoylcarnitine (C8:0)",
                    "9-OAHSA",
-                   "3-Hydroxyisobutyric acid",
-                   "Tetradecadienoylcarnitine (C14:2)")
+                   "3-hydroxyisobutyric acid (3-NPH-cpp 1)",
+                   "tetradecadienoylcarnitine (C14:2)")
 
 # Named vector: old name -> new name
 label_map_pc1 <- setNames(new_names_pc1, alasca_time_session_named_loadings_pc1_order)
@@ -556,26 +556,26 @@ alasca_time_session_named_loadings_pc2_order <-
   alasca_time_session_named_loadings_pc2_top20$metabolite
 
 # New names 
-new_names_pc2 <- c("Caffeine",
-                   "3-Methylhistidine",
+new_names_pc2 <- c("caffeine",
+                   "3-methylhistidine",
                    "9-HPODE",
-                   "Glu-Leu",
-                   "Tryptophan",
-                   "Ectoine",
-                   "L-Tryptophan",
-                   "3-Methylhistamine",
-                   "Phosphatidylethanolamine 18:1",
-                   "Phenylalanine",
-                   "Gluconic acid",
-                   "Deoxycholic acid",
-                   "Malic acid",
-                   "Pyruvic acid (pyruvate)",
-                   "Erythrose",
-                   "5-Aminolevulinic acid",
-                   "Glucosamine-6-sulfate",
-                   "Lactic acid (lactate)",
+                   "glu-leu",
+                   "tryptophan",
+                   "ectoine",
+                   "L-tryptophan",
+                   "3-methylhistamine",
+                   "phosphatidylethanolamine (PE 18:1/0:0)",
+                   "phenylalanine",
+                   "gluconic acid",
+                   "deoxycholic acid (3-NPH-cpp 1)",
+                   "malic acid (3-NPH-cpp 2)",
+                   "pyruvic acid (di-3-NPH)",
+                   "erythrose",
+                   "5-aminolevulinic acid",
+                   "glucosamine-6-sulfate",
+                   "lactic acid (3-NPH)",
                    "dUMP (deoxyuridine monophosphate)",
-                   "Hydroxypropionic acid")
+                   "hydroxypropionic acid")
 
 # Named vector: old name -> new name
 label_map_pc2 <- setNames(new_names_pc2, alasca_time_session_named_loadings_pc2_order)
